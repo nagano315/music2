@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Soundscape — 音楽の趣味を可視化</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./"><span class="brand-mark">♫</span><span>MY SOUNDSCAPE</span></a>
+      <label class="upload-button" for="csv-file"><span>↑</span> CSVを読み込む
+        <input id="csv-file" type="file" accept=".csv,text/csv">
+      </label>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">YOUR PERSONAL MUSIC PROFILE</p>
+      <h1>音楽の趣味を、<span>ひと目で。</span></h1>
+      <p class="intro-copy">いつもの再生履歴から、あなたらしい音楽の風景を見つけましょう。</p>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><p class="stat-label">総再生回数</p><p class="stat-value" id="total-plays">—</p><p class="stat-note">CSV内の再生回数</p></article>
+      <article class="stat-card"><p class="stat-label">音楽を聴いた時間</p><p class="stat-value" id="total-hours">—</p><p class="stat-note">曲の再生時間の合計</p></article>
+      <article class="stat-card"><p class="stat-label">お気に入りジャンル</p><p class="stat-value stat-text" id="top-genre">—</p><p class="stat-note">再生回数が最も多いジャンル</p></article>
+      <article class="stat-card"><p class="stat-label">よく聴くアーティスト</p><p class="stat-value stat-text" id="top-artist">—</p><p class="stat-note">再生回数が最も多いアーティスト</p></article>
+    </section>
+
+    <section class="charts-grid">
+      <article class="panel genre-panel">
+        <div class="panel-heading"><div><p class="eyebrow">GENRE MIX</p><h2>ジャンルのバランス</h2></div><span class="panel-icon">◉</span></div>
+        <div class="genre-chart-wrap"><canvas id="genre-chart"></canvas></div>
+        <p class="chart-caption">ジャンルごとの再生回数</p>
+      </article>
+      <article class="panel artists-panel">
+        <div class="panel-heading"><div><p class="eyebrow">TOP ARTISTS</p><h2>よく聴くアーティスト</h2></div><span class="panel-icon">♫</span></div>
+        <div class="artist-chart-wrap"><canvas id="artist-chart"></canvas></div>
+        <p class="chart-caption">再生回数の多い上位5組</p>
+      </article>
+    </section>
+
+    <section class="panel tracks-panel">
+      <div class="panel-heading tracks-heading"><div><p class="eyebrow">YOUR ROTATION</p><h2>お気に入りの楽曲</h2></div>
+        <label class="search-box"><span class="sr-only">楽曲検索</span><span>⌕</span><input id="track-search" type="search" placeholder="曲・アーティストを検索"></label>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>楽曲</th><th>アーティスト</th><th>ジャンル</th><th class="numeric">再生回数</th></tr></thead><tbody id="track-list"></tbody></table></div>
+      <p class="empty-message" id="empty-message" hidden>該当する楽曲がありません。</p>
+    </section>
+
+    <footer class="footer"><span>MY SOUNDSCAPE</span><span id="data-status">CSVを読み込み中…</span></footer>
+  </main>
+</body>
+</html>
